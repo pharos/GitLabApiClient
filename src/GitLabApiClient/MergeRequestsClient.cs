@@ -6,6 +6,8 @@ using GitLabApiClient.Internal.Http;
 using GitLabApiClient.Internal.Paths;
 using GitLabApiClient.Internal.Queries;
 using GitLabApiClient.Models.AwardEmojis.Responses;
+using GitLabApiClient.Models.Changes.Responses;
+using GitLabApiClient.Models.Commits.Responses;
 using GitLabApiClient.Models.Discussions.Responses;
 using GitLabApiClient.Models.MergeRequests.Requests;
 using GitLabApiClient.Models.MergeRequests.Responses;
@@ -175,5 +177,16 @@ namespace GitLabApiClient
         public async Task<IList<AwardEmoji>> GetAwardEmojisAsync(ProjectId projectId, int mergeRequestIid) =>
             await _httpFacade.GetPagedList<AwardEmoji>($"projects/{projectId}/merge_requests/{mergeRequestIid}/award_emoji");
 
+        /// <summary>
+        /// Retrieves changes of a merge request.
+        /// </summary>
+        /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
+        /// <param name="mergeRequestIid">Iid of the merge request.</param>
+        /// <returns>Merge requests satisfying options.</returns>
+        public async Task<IList<Change>> GetChangesAsync(ProjectId projectId, int mergeRequestIid)
+        {
+            return (await _httpFacade
+                .Get<MergeRequestWithChanges>($"projects/{projectId}/merge_requests/{mergeRequestIid}/changes"))?.Changes;
+        }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GitLabApiClient.Internal.Paths;
 using GitLabApiClient.Models.AwardEmojis.Responses;
+using GitLabApiClient.Models.Changes.Responses;
+using GitLabApiClient.Models.Commits.Responses;
 using GitLabApiClient.Models.Discussions.Responses;
 using GitLabApiClient.Models.MergeRequests.Requests;
 using GitLabApiClient.Models.MergeRequests.Responses;
@@ -112,5 +114,14 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestIid">The Internal Merge Request Id.</param>
         Task<IList<AwardEmoji>> GetAwardEmojisAsync(ProjectId projectId, int mergeRequestIid);
+
+        /// <summary>
+        /// Retrieves changes of a merge request.
+        /// </summary>
+        /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
+        /// <param name="mergeRequestIid">Iid of the merge request.</param>
+        /// <returns>Merge requests satisfying options.</returns>
+        Task<IList<Change>> GetChangesAsync(ProjectId projectId, int mergeRequestIid);
+
     }
 }
